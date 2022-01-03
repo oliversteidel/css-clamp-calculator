@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="flex">
+    <div class="wrapper flex">
       <div class="font-input--min flex-col">
         <label for="font-min">MIN-FontSize</label>
         <input type="text" name="font-min" />
@@ -10,7 +10,7 @@
         <input type="text" name="font-max" />
       </div>
     </div>
-    <div class="flex">
+    <div class="wrapper flex">
       <div class="width-input--min flex-col">
         <label for="width-min">MIN-ScreenWidth</label>
         <input type="text" name="width-min" />
@@ -34,7 +34,11 @@ export default {};
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  //justify-content: center;
+
+  .wrapper:first-child {
+    margin-bottom: 2rem;
+  }
 
   .font-input,
   .width-input {
@@ -45,6 +49,13 @@ export default {};
 
   .font-input {
     margin-bottom: 2rem;
+  }
+
+  input {
+    border: none;
+    padding: 0.5rem;
+    border-radius: 5px;
+    box-shadow: 0 0 4px $clr-shadow inset;
   }
 }
 </style>

@@ -1,19 +1,31 @@
 <template>
   <div id="app">
     <Header />
-    <Inputs />
+    <main>
+      <section class="top">
+        <Inputs />
+        <Preview />
+      </section>
+      <section class="bottom">
+        <Result />
+      </section>
+    </main>
   </div>
 </template>
 
 <script>
 import Header from "./components/Header.vue";
 import Inputs from "./components/Inputs.vue";
+import Preview from "./components/Preview.vue";
+import Result from "./components/Result.vue";
 
 export default {
   name: "App",
   components: {
     Header,
     Inputs,
+    Preview,
+    Result,
   },
 };
 </script>
@@ -23,6 +35,17 @@ export default {
 
 #app {
   font-family: "Roboto", sans-serif;
-  background: $clr-white;
+  color: $clr-black;
+
+  main {
+    min-height: 100vh;
+    background: $clr-white;
+
+    .top {
+      display: flex;
+      align-items: flex-end;
+      padding: 2rem 4rem;
+    }
+  }
 }
 </style>
