@@ -1,6 +1,11 @@
 <template>
   <div class="header">
-    <h1>Clamp Calculator</h1>
+    <div class="logo">
+      <img src="../assets/logo.svg" alt="" />
+    </div>
+    <div class="title">
+      <h1>css-clamp() Calculator</h1>
+    </div>
   </div>
 </template>
 <script>
@@ -13,11 +18,14 @@ export default {};
   display: flex;
   align-items: center;
   width: 100vw;
-  height: 5rem;
+
   padding: 1rem 3rem;
   background: $clr-light-grey;
   box-shadow: $clr-shadow;
 
+  .title {
+    padding-left: 2rem;
+  }
   h1 {
     font-weight: 400;
   }
