@@ -15,13 +15,15 @@ export default {};
 @use "../scss/setup/index" as *;
 
 header {
+  position: absolute;
   display: flex;
   align-items: center;
   width: 100vw;
 
   padding: 1rem 3rem;
   background: $clr-light-grey;
-  box-shadow: 0 0 10px $clr-shadow;
+
+  box-shadow: 0 0 10px hsla(100, 0%, 1%, 0.2);
 
   .title {
     padding-left: 2rem;

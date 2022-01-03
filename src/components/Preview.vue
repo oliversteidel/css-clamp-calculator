@@ -15,7 +15,7 @@ export default {};
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 2rem 0;
+
   padding: 3rem;
   border-radius: 5px;
   background: #fff;

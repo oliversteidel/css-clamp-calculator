@@ -39,6 +39,7 @@ export default {
 
   main {
     min-height: 100vh;
+    padding-top: 10rem;
     background: $clr-white;
 
     .top {

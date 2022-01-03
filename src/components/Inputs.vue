@@ -30,10 +30,10 @@ export default {};
 
 .container {
   width: 100%;
-  padding: 2rem;
+
   display: flex;
   flex-direction: column;
-  align-items: center;
+
   //justify-content: center;
 
   .wrapper:first-child {
@@ -49,6 +49,10 @@ export default {};
 
   .font-input {
     margin-bottom: 2rem;
+  }
+
+  label {
+    margin-bottom: 0.25rem;
   }
 
   input {
