@@ -3,11 +3,11 @@
     <Header />
     <main>
       <section class="top">
-        <Inputs />
+        <Inputs v-on:calculate="setResult" />
         <Preview />
       </section>
       <section class="bottom">
-        <Result />
+        <Result :resultString="resultString" />
       </section>
     </main>
   </div>
@@ -26,6 +26,16 @@ export default {
     Inputs,
     Preview,
     Result,
+  },
+  data() {
+    return {
+      resultString: null,
+    };
+  },
+  methods: {
+    setResult(str) {
+      this.resultString = `clamp(${str})`;
+    },
   },
 };
 </script>

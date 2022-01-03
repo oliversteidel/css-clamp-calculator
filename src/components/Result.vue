@@ -2,7 +2,7 @@
   <div>
     <div class="container">
       <div class="wrapper">
-        <p>{{ resultString }}</p>
+        <p v-if="resultString != null">{{ resultString }}</p>
         <button>
           <img src="../assets/copy-thin.svg" alt="" />
         </button>
@@ -12,11 +12,7 @@
 </template>
 <script>
 export default {
-  data() {
-    return {
-      resultString: `clamp(1.5rem, 5vw, 3rem)`,
-    };
-  },
+  props: ["resultString"],
 };
 </script>
 <style lang="scss" scoped>
