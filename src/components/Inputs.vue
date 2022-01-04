@@ -3,21 +3,45 @@
     <div class="wrapper flex">
       <div class="font-input--min flex-col">
         <label for="font-min">MIN-FontSize</label>
-        <input type="text" name="font-min" v-model="inputFontMin" />
+        <div class="input-wrapper">
+          <input type="text" name="font-min" v-model="inputFontMin" />
+          <select name="unit" id="font-min-unit">
+            <option value="px">px</option>
+            <option value="rem">rem</option>
+          </select>
+        </div>
       </div>
       <div class="font-input--max flex-col">
         <label for="font-max">MAX-FontSize</label>
-        <input type="text" name="font-max" v-model="inputFontMax" />
+        <div class="input-wrapper">
+          <input type="text" name="font-max" v-model="inputFontMax" />
+          <select name="unit" id="font-max-unit">
+            <option value="px">px</option>
+            <option value="rem">rem</option>
+          </select>
+        </div>
       </div>
     </div>
     <div class="wrapper flex">
       <div class="width-input--min flex-col">
         <label for="width-min">MIN-ScreenWidth</label>
-        <input type="text" name="width-min" v-model="inputWidthMin" />
+        <div class="input-wrapper">
+          <input type="text" name="width-min" v-model="inputWidthMin" />
+          <select name="unit" id="width-min-unit">
+            <option value="px">px</option>
+            <option value="rem">rem</option>
+          </select>
+        </div>
       </div>
       <div class="width-input--max flex-col">
         <label for="width-max">MAX-ScreenWidth</label>
-        <input type="text" name="width-max" v-model="inputWidthMax" />
+        <div class="input-wrapper">
+          <input type="text" name="width-max" v-model="inputWidthMax" />
+          <select name="unit" id="width-max-unit">
+            <option value="px">px</option>
+            <option value="rem">rem</option>
+          </select>
+        </div>
       </div>
     </div>
     <button @click="sendData">Calculate</button>
@@ -35,16 +59,36 @@ export default {
   },
   computed: {
     fontMin() {
-      return parseFloat(this.inputFontMin);
+      let number = parseFloat(this.inputFontMin);
+      let unit = document.getElementById("font-min-unit").value;
+      if (unit === "px") {
+        number = number / 16;
+      }
+      return number;
     },
     fontMax() {
-      return parseFloat(this.inputFontMax);
+      let number = parseFloat(this.inputFontMax);
+      let unit = document.getElementById("font-max-unit").value;
+      if (unit === "px") {
+        number = number / 16;
+      }
+      return number;
     },
     widthMin() {
-      return parseFloat(this.inputWidthMin);
+      let number = parseFloat(this.inputWidthMin);
+      let unit = document.getElementById("width-min-unit").value;
+      if (unit === "px") {
+        number = number / 16;
+      }
+      return number;
     },
     widthMax() {
-      return parseFloat(this.inputWidthMax);
+      let number = parseFloat(this.inputWidthMax);
+      let unit = document.getElementById("width-max-unit").value;
+      if (unit === "px") {
+        number = number / 16;
+      }
+      return number;
     },
     slope() {
       return (
@@ -60,9 +104,9 @@ export default {
       );
     },
     resultString() {
-      return `${this.fontMin}, ${this.yAxisIntersection}rem + ${
+      return `${this.fontMin}rem, ${this.yAxisIntersection}rem + ${
         this.slope * 100
-      }vw, ${this.fontMax}`;
+      }vw, ${this.fontMax}rem`;
     },
   },
   methods: {
@@ -99,11 +143,25 @@ export default {
     margin-bottom: 0.25rem;
   }
 
+  .input-wrapper {
+    display: flex;
+  }
+
   input {
-    border: none;
     padding: 0.5rem;
+    border: none;
     border-radius: 5px;
     box-shadow: 0 0 4px $clr-shadow inset;
+  }
+
+  select {
+    min-height: 2.5rem;
+    margin-left: 0.5rem;
+    padding: 0.5rem;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 0 4px $clr-shadow inset;
+    background: #fff;
   }
 
   button {

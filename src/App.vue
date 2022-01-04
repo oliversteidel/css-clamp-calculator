@@ -34,6 +34,7 @@ export default {
   },
   methods: {
     setResult(str) {
+      this.resultString = "";
       this.resultString = `clamp(${str})`;
     },
   },
