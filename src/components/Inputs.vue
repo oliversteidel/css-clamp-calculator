@@ -3,47 +3,71 @@
     <div class="wrapper flex">
       <div class="font-input--min flex-col">
         <label for="font-min">MIN-FontSize</label>
-        <input type="text" name="font-min" v-model="fontMin" />
+        <input type="text" name="font-min" v-model="inputFontMin" />
       </div>
       <div class="font-input--max flex-col">
         <label for="font-max">MAX-FontSize</label>
-        <input type="text" name="font-max" v-model="fontMax" />
+        <input type="text" name="font-max" v-model="inputFontMax" />
       </div>
     </div>
     <div class="wrapper flex">
       <div class="width-input--min flex-col">
         <label for="width-min">MIN-ScreenWidth</label>
-        <input type="text" name="width-min" v-model="widthMin" />
+        <input type="text" name="width-min" v-model="inputWidthMin" />
       </div>
       <div class="width-input--max flex-col">
         <label for="width-max">MAX-ScreenWidth</label>
-        <input type="text" name="width-max" v-model="widthMax" />
+        <input type="text" name="width-max" v-model="inputWidthMax" />
       </div>
     </div>
-    <button @click="$emit(calculate, resultString)">Calculate</button>
+    <button @click="sendData">Calculate</button>
   </div>
 </template>
 <script>
 export default {
   data() {
     return {
-      fontMin: null,
-      fontMax: null,
-      widthMin: null,
-      widthMax: null,
+      inputFontMin: null,
+      inputFontMax: null,
+      inputWidthMin: null,
+      inputWidthMax: null,
     };
   },
   computed: {
+    fontMin() {
+      return parseFloat(this.inputFontMin);
+    },
+    fontMax() {
+      return parseFloat(this.inputFontMax);
+    },
+    widthMin() {
+      return parseFloat(this.inputWidthMin);
+    },
+    widthMax() {
+      return parseFloat(this.inputWidthMax);
+    },
     slope() {
-      return (this.fontMax - this.fontMin) / (this.widthMax - this.widthMin);
+      return (
+        Math.round(
+          ((this.fontMax - this.fontMin) / (this.widthMax - this.widthMin)) *
+            10000
+        ) / 10000
+      );
     },
     yAxisIntersection() {
-      return -this.widthMin * slope + this.fontMin;
+      return (
+        Math.round((-this.widthMin * this.slope + this.fontMin) * 10000) / 10000
+      );
     },
     resultString() {
       return `${this.fontMin}, ${this.yAxisIntersection}rem + ${
         this.slope * 100
       }vw, ${this.fontMax}`;
+    },
+  },
+  methods: {
+    sendData() {
+      this.$emit("show-string", this.resultString);
     },
   },
 };

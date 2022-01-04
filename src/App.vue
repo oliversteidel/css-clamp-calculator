@@ -3,7 +3,7 @@
     <Header />
     <main>
       <section class="top">
-        <Inputs v-on:calculate="setResult" />
+        <Inputs v-on:show-string="setResult($event)" />
         <Preview />
       </section>
       <section class="bottom">
