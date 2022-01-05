@@ -4,7 +4,15 @@
   </div>
 </template>
 <script>
-export default {};
+export default {
+  props: ["resultString"],
+  watch: {
+    resultString(val) {
+      document.querySelector(".preview-letter").style.fontSize = val;
+      console.log(val);
+    },
+  },
+};
 </script>
 <style lang="scss" scoped>
 @use "../scss/setup/index" as *;
