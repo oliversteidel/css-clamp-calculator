@@ -3,7 +3,7 @@
     <div class="container">
       <div class="wrapper">
         <p v-if="resultString != null">{{ resultString }}</p>
-        <button>
+        <button :class="{ shadow: !isClicked }" @click="copyToClipboard">
           <img src="../assets/copy-thin.svg" alt="" />
         </button>
       </div>
@@ -13,6 +13,20 @@
 <script>
 export default {
   props: ["resultString"],
+  data() {
+    return {
+      isClicked: false,
+    };
+  },
+  methods: {
+    copyToClipboard() {
+      this.isClicked = true;
+      navigator.clipboard.writeText(this.resultString);
+      setTimeout(() => {
+        this.isClicked = false;
+      }, 50);
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>
@@ -46,6 +60,15 @@ export default {
       border: none;
       background: $clr-light-grey;
       border-radius: 5px;
+
+      transition: all 0.2s ease-out;
+    }
+
+    button:hover {
+      background: $clr-hover;
+    }
+
+    .shadow {
       box-shadow: 3px 3px 5px $clr-shadow;
     }
   }

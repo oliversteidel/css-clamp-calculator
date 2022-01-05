@@ -4,7 +4,12 @@
       <div class="font-input--min flex-col">
         <label for="font-min">MIN-FontSize</label>
         <div class="input-wrapper">
-          <input type="text" name="font-min" v-model="inputFontMin" />
+          <input
+            id="input-font-min"
+            type="text"
+            name="font-min"
+            v-model="inputFontMin"
+          />
           <select name="unit" id="font-min-unit">
             <option value="px">px</option>
             <option value="rem">rem</option>
@@ -48,7 +53,13 @@
   </div>
 </template>
 <script>
+import { onMounted } from "@vue/runtime-core";
 export default {
+  setup() {
+    onMounted(() => {
+      document.getElementById("input-font-min").focus();
+    });
+  },
   data() {
     return {
       inputFontMin: "",
@@ -56,7 +67,7 @@ export default {
       inputWidthMin: "",
       inputWidthMax: "",
       isClicked: false,
-      errorMsg: "Please fill all form inputs.",
+      errorMsg: "Please fill in all form inputs.",
     };
   },
   computed: {
