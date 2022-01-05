@@ -44,17 +44,19 @@
         </div>
       </div>
     </div>
-    <button @click="sendData">Calculate</button>
+    <button :class="{ shadow: !isClicked }" @click="sendData">Calculate</button>
   </div>
 </template>
 <script>
 export default {
   data() {
     return {
-      inputFontMin: null,
-      inputFontMax: null,
-      inputWidthMin: null,
-      inputWidthMax: null,
+      inputFontMin: "",
+      inputFontMax: "",
+      inputWidthMin: "",
+      inputWidthMax: "",
+      isClicked: false,
+      errorMsg: "Please fill all form inputs.",
     };
   },
   computed: {
@@ -104,14 +106,30 @@ export default {
       );
     },
     resultString() {
-      return `${this.fontMin}rem, ${this.yAxisIntersection}rem + ${
+      return `clamp(${this.fontMin}rem, ${this.yAxisIntersection}rem + ${
         this.slope * 100
-      }vw, ${this.fontMax}rem`;
+      }vw, ${this.fontMax}rem)`;
+    },
+    formIsFilled() {
+      return (
+        this.inputFontMin !== "" &&
+        this.inputFontMax !== "" &&
+        this.inputWidthMin !== "" &&
+        this.inputWidthMax !== ""
+      );
     },
   },
   methods: {
     sendData() {
-      this.$emit("show-string", this.resultString);
+      this.isClicked = true;
+      if (!this.formIsFilled) {
+        this.$emit("show-string", this.errorMsg);
+      } else {
+        this.$emit("show-string", this.resultString);
+      }
+      setTimeout(() => {
+        this.isClicked = false;
+      }, 50);
     },
   },
 };
@@ -172,8 +190,17 @@ export default {
     border: none;
     background: $clr-light-grey;
     border-radius: 5px;
-    box-shadow: 3px 3px 5px $clr-shadow;
     cursor: pointer;
+    transition: all 0.2s ease-out;
+  }
+
+  button:hover {
+    background: $clr-hover;
+  }
+
+  .shadow {
+    box-shadow: 3px 3px 5px $clr-shadow;
+    transition: all 0.2s ease-out;
   }
 }
 </style>
