@@ -4,7 +4,6 @@
     <main>
       <section class="top">
         <Inputs v-on:show-string="setResult($event)" />
-        <Preview />
       </section>
       <section class="bottom">
         <Result :resultString="resultString" />
@@ -16,7 +15,7 @@
 <script>
 import Header from "./components/Header.vue";
 import Inputs from "./components/Inputs.vue";
-import Preview from "./components/Preview.vue";
+
 import Result from "./components/Result.vue";
 
 export default {
@@ -24,7 +23,7 @@ export default {
   components: {
     Header,
     Inputs,
-    Preview,
+
     Result,
   },
   data() {
